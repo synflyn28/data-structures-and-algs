@@ -2,17 +2,20 @@
 This script implements the quick sort algorithm.
 """
 
-def quick_sort(my_arr):
+def quick_sort(my_array):
     """
-    Sorts an array using the quick sort algorithm.
+    This function sorts an array using the quick sort algorithm.
     """
 
-    qshelper(my_arr, 0, len(my_arr) - 1)
-    return my_arr
-    
-def qshelper(my_arr, start, end):
+    qs_helper(my_array, 0, len(my_array) - 1)
+
+    return my_array
+
+
+def qs_helper(my_array, start, end):
     """
-    Helper function for quick_sort.
+    This function is a helper function that helps process
+    each decomposition of the array in quick sort. 
     """
 
     if start >= end:
@@ -23,14 +26,29 @@ def qshelper(my_arr, start, end):
     right = end
 
     while right >= left:
-        if my_arr[left] > my_arr[pivot] and my_arr[right] < my_arr[pivot]:
-            my_arr[left], my_arr[right] = my_arr[right], my_arr[left]
-        elif my_arr[left] <= my_arr[pivot]:
-            left += 1
-        elif my_arr[right] >= my_arr[pivot]:
-            right -= 1
+        if my_array[left] > my_array[pivot] and my_array[right] < my_array[pivot]:
+            
+            # Swap the pivot with the right element
+            my_array[left], my_array[right] = my_array[right], my_array[left]
 
-    my_arr[pivot], my_arr[right] = my_arr[right], my_arr[pivot]
+        elif my_array[left] <= my_array[pivot]:
+            left += 1 # Move the left pointer to the right
 
-    qshelper(my_arr, start, right - 1)
-    qshelper(my_arr, right + 1, end)
+        elif my_array[right] >= my_array[pivot]:
+            right -= 1 # Move the right pointer to the left
+
+    # After swapping move the pivot point to the correct sorted position
+    my_array[pivot], my_array[right] = my_array[right], my_array[pivot]
+
+    # Recursively run the helper function on the values that are less than on the left
+    # side of the pivot 
+    qs_helper(my_array, start, right - 1)
+
+    # Recursively run the helper function on the values that are greater than on the right
+    # side of the pivot 
+    qs_helper(my_array, right + 1, end)
+
+
+if __name__ == "__main__":
+    my_array = [3, 5, 2, 1, 4, 6, 7, 8, 9]
+    print(quick_sort(my_array))
