@@ -24,6 +24,3 @@ class Solution:
             # No succeeding move needed because suc is assigned next value at beginning of loop.
 
             return pre # Return preceding node when cur is None at the end of the LinkedList.
-
-
-            
